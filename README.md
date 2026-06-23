@@ -1,4 +1,4 @@
 # Test
 Test
 
-void
+void main
