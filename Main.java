@@ -1,6 +1,6 @@
 class Main{
     public static void main(String[] args){
-        int number = 30;
+        int Number = 30;
         System.out.println("Hello java");
     }
 }
