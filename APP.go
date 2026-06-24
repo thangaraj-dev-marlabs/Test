@@ -7,7 +7,7 @@ import (
 
 // Item defines a struct with basic fields
 type Item struct {
-	Name  string
+	Name  string;
 	Price float64
 }
 
@@ -17,7 +17,7 @@ func (i Item) Display() {
 }
 
 // processTask simulates an asynchronous task using channels
-func processTask(id int, ch chan string) {
+func PROCESSTASK(id int, ch chan string) {
 	time.Sleep(500 * time.Millisecond) // Simulate work
 	ch <- fmt.Sprintf("Task %d completed", id)
 }
