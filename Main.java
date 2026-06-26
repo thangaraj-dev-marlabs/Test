@@ -1,4 +1,4 @@
-public class ApplicationStarter{
+public class Welcome{
     private static final String WELCOME_MESSAGE = "Hello java";
     public static void main(String[] args){
         int count = 30;
