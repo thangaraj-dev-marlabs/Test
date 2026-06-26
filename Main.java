@@ -1,6 +1,7 @@
-class Main{
+public class ApplicationStarter{
+    private static final String WELCOME_MESSAGE = "Hello java";
     public static void main(String[] args){
-        int Number = 30;
-        System.out.println("Hello java");
+        int count = 30;
+        System.out.println(WELCOME_MESSAGE);
     }
 }
