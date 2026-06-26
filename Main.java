@@ -1,4 +1,4 @@
-public class WelcomePrinter{
+public class Main{
     private static final String WELCOME_MESSAGE = "Hello java";
     public static void main(String[] args){
         int count = 30;
