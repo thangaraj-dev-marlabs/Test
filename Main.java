@@ -1,8 +1,8 @@
 public class Main {
-    private static final String WELCOME_MESSAGE = "Hello java";
-
     public static void main(String[] args) {
-        int count = 30;
-        System.out.println(WELCOME_MESSAGE);
+        flaot value1= 10.2;
+        float value2 = 11.3;
+        int sum = value1+value2;
+        System.out.println("Sum of two value :"+sum);
     }
 }
