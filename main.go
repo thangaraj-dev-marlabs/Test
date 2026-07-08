@@ -79,5 +79,10 @@ func main() {
 
     fmt.Println("Encrypted:", encrypted)
 
-  
+    decrypted, err := decrypt(encrypted, key)
+    if err != nil {
+        panic(err)
+    }
+
+    fmt.Println("Decrypted:", decrypted)
 }
