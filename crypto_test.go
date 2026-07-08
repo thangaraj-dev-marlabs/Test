@@ -127,3 +127,52 @@ func TestEncryptDecryptSupportsEmptyPlaintext(t *testing.T) {
         t.Fatalf("got %q want empty string", decrypted)
     }
 }
+func TestCiphertextContainsEmbeddedNonce(t *testing.T) {
+    key := []byte("12345678901234567890123456789012")
+    plaintext := []byte("hello world")
+
+    encrypted, err := Encrypt(plaintext, key)
+    if err != nil {
+        t.Fatalf("Encrypt returned error: %v", err)
+    }
+
+    raw, err := base64.StdEncoding.DecodeString(encrypted)
+    if err != nil {
+        t.Fatalf("base64 decode failed: %v", err)
+    }
+
+    block, err := aes.NewCipher(key)
+    if err != nil {
+        t.Fatalf("aes.NewCipher failed: %v", err)
+    }
+
+    aead, err := cipher.NewGCM(block)
+    if err != nil {
+        t.Fatalf("cipher.NewGCM failed: %v", err)
+    }
+
+    nonceSize := aead.NonceSize()
+    if len(raw) <= nonceSize {
+        t.Fatalf("ciphertext does not contain embedded nonce and payload")
+    }
+
+    nonce := raw[:nonceSize]
+    ciphertext := raw[nonceSize:]
+
+    if len(nonce) != nonceSize {
+        t.Fatalf("got nonce length %d want %d", len(nonce), nonceSize)
+    }
+
+    if len(ciphertext) == 0 {
+        t.Fatal("ciphertext payload missing after nonce")
+    }
+
+    decrypted, err := aead.Open(nil, nonce, ciphertext, nil)
+    if err != nil {
+        t.Fatalf("failed to decrypt using extracted nonce: %v", err)
+    }
+
+    if string(decrypted) != string(plaintext) {
+        t.Fatalf("got %q want %q", decrypted, plaintext)
+    }
+}
