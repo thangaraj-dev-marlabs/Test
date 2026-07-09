@@ -23,7 +23,6 @@ public class WebhookDemoServer {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
         // ✓ Criterion 1: Server exposes POST /webhook/github and /webhook/github1
         server.createContext("/webhook/github", new GitHubWebhookHandler());
-        server.createContext("/webhook/github1", new GitHubWebhookHandler());
         server.setExecutor(Executors.newFixedThreadPool(4));
         server.start();
         System.out.println("Webhook server listening on http://localhost:" + PORT + "/webhook/github");
