@@ -21,12 +21,10 @@ public class WebhookDemoServer {
 
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
-        // ✓ Criterion 1: Server exposes POST /webhook/github and /webhook/github1
         server.createContext("/webhook/github", new GitHubWebhookHandler());
         server.setExecutor(Executors.newFixedThreadPool(4));
         server.start();
         System.out.println("Webhook server listening on http://localhost:" + PORT + "/webhook/github");
-        System.out.println("Webhook server listening on http://localhost:" + PORT + "/webhook/github1");
     }
 
     static class GitHubWebhookHandler implements HttpHandler {
